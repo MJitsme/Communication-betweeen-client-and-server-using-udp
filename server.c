@@ -44,8 +44,8 @@ int main()
   sockfd=socket(AF_INET,SOCK_DGRAM,0);
   printf("Socket created successfully");
   server.sin_family=AF_INET;
-  server.sin_addr.s_addr=INADDR_ANY;
-  server.sin_port=PORT;
+  server.sin_addr.s_addr=htonl(INADDR_ANY);
+  server.sin_port=htons(PORT);
 
   if(bind(sockfd,(SA*)&server,sizeof(server))==0)
   {
