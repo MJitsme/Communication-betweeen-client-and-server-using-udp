@@ -18,7 +18,7 @@ void chat(int sockfd,SAI server)
   char buff[MAX];
   printf("Client ready to send message\n");
   len=sizeof(server);
-  while(1);
+  while(1)
   {
     bzero(buff,MAX);
     printf("\nEnter the message to server:");
