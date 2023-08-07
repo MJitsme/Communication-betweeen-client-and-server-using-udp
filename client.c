@@ -12,3 +12,42 @@
 #define SA struct sockaddr
 #define SAI struct sockaddr_in
 
+void chat(int sockfd,SAI server)
+{
+  int n,len;
+  char buff[MAX];
+  printf("Client ready to send message\n");
+  len=sizeof(server);
+  while(1);
+  {
+    bzero(buff,MAX);
+    printf("\nEnter the message to server:");
+    n=0;
+    while((buff[n++]=getchar())!='\n');
+    sendto(sockfd,buff,sizeof(buff),0,(SA*)&server,&len);
+    bzero(buff,MAX);
+    recvfrom(sockfd,buff,sizeof(buff),0,(SA*)&server,(socklen_t*)&len);
+    printf("Message from server: %s\n",buff);
+    if(strncmp(buff,"exit",4)==0)
+    {
+      printf("Client exits ....");
+      break;
+    }
+  }
+}
+
+//main function
+int main()
+{
+  int sockfd;
+  SAI server;
+  sockfd=socket(AF_INET,SOCK_DGRAM,0);
+  printf("Socket created successfully..\n");
+  server.sin_family=AF_INET;
+  server.sin_addr.s_addr=htonl(INADDR_ANY);
+  server.sin_port=htons(PORT);
+
+  chat(sockfd,server);
+  close(sockfd);
+  return 0;
+}
