@@ -22,7 +22,7 @@ void chat(int sockfd,SAI client)
   {
     bzero(buff,MAX);
     recvfrom(sockfd,buff,sizeof(buff),0,(SA*)&client,(socklen_t*)&len);
-    printf("\nMessage from client : ");
+    printf("\nMessage from client : %s",buff);
     bzero(buff,MAX);
     n=0;
     printf("\nEnter the message to server: ");
