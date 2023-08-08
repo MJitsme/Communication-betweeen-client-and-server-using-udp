@@ -23,6 +23,11 @@ void chat(int sockfd,SAI client)
     bzero(buff,MAX);
     recvfrom(sockfd,buff,sizeof(buff),0,(SA*)&client,(socklen_t*)&len);
     printf("\nMessage from client : %s",buff);
+    if(strncmp(buff,"exit",4)==0)
+    {
+      printf("Server exits as Client exits...\n");
+      break;
+    }
     bzero(buff,MAX);
     n=0;
     printf("\nEnter the message to server: ");
