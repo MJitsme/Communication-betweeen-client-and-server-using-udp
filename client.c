@@ -25,12 +25,17 @@ void chat(int sockfd,SAI server)
     n=0;
     while((buff[n++]=getchar())!='\n');
     sendto(sockfd,buff,sizeof(buff),0,(SA*)&server,&len);
+    if(strncmp(buff,"exit",4)==0)
+    {
+      printf("Client exits ....");
+      break;
+    }
     bzero(buff,MAX);
     recvfrom(sockfd,buff,sizeof(buff),0,(SA*)&server,(socklen_t*)&len);
     printf("Message from server: %s\n",buff);
     if(strncmp(buff,"exit",4)==0)
     {
-      printf("Client exits ....");
+      printf("Client exits as server exits ....");
       break;
     }
   }
